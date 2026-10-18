@@ -21,11 +21,11 @@ public class GlobalExceptionHandler {
     /** Converts validation failures into a 400 response body. */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Map.of(
                         "timestamp", Instant.now().toString(),
-                        "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                        "error", "Internal Server Error",
+                        "status", HttpStatus.BAD_REQUEST.value(),
+                        "error", "Bad Request",
                         "message", message(exception)));
     }
 
