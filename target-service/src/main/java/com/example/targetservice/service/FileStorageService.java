@@ -20,7 +20,10 @@ public class FileStorageService {
      * BUG: No path traversal protection - "../" sequences allow reading arbitrary files.
      */
     public String readFile(String fileName) throws IOException {
-        Path filePath = BASE_DIR.resolve(fileName);
+        Path filePath = BASE_DIR.resolve(fileName).normalize();
+        if (!filePath.startsWith(BASE_DIR)) {
+            throw new IllegalArgumentException("fileName must stay within storage directory");
+        }
         return Files.readString(filePath);
     }
 
