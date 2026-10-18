@@ -17,7 +17,7 @@ public class OrderController {
     }
 
     /** Returns a quote with the calculated unit price. */
-    @GetMapping("/api/orders/quote")
+    @GetMapping("/api/orders/price")
     public OrderQuoteResponse quote(@RequestParam int totalCents, @RequestParam int quantity) {
         int unitPriceCents = orderService.calculateUnitPrice(totalCents, quantity);
         return new OrderQuoteResponse(totalCents, quantity, unitPriceCents);
